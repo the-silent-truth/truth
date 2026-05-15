@@ -1,0 +1,179 @@
+
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>静かな真実 - The Silent Truth</title>
+    <style>
+        :root {
+            --accent-color: #5a738c;
+            --text-main: #ffffff;
+            --text-sub: #e0e0e0;
+        }
+        body {
+            margin: 0; padding: 0;
+            background-color: #050505;
+            color: var(--text-main);
+            font-family: "Meiryo", sans-serif;
+            line-height: 1.8;
+            overflow-x: hidden;
+            /* スクロールバー非表示（没入感向上） */
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+        body::-webkit-scrollbar { display: none; }
+        
+        .container { max-width: 500px; margin: 0 auto; }
+        
+        /* セクションごとの画像背景設定 */
+        section {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 0 30px;
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed; /* パララックス効果（iOSSafariでは一部制限あり） */
+            position: relative;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+        /* 文字の可読性を確保する漆黒のグラデーション・オーバーレイ */
+        section::before {
+            content: "";
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: linear-gradient(to bottom, rgba(5,5,5,0.6) 0%, rgba(5,5,5,0.95) 100%);
+            z-index: 1;
+        }
+        section.visible { opacity: 1; transform: translateY(0); }
+        
+        .content-wrapper {
+            position: relative;
+            z-index: 2;
+            border-left: 3px solid var(--accent-color);
+            padding-left: 20px;
+        }
+        h2 { font-size: 2.0rem; margin-bottom: 30px; color: var(--text-main); line-height: 1.4; text-shadow: 2px 2px 4px rgba(0,0,0,0.9); }
+        p { font-size: 1.15rem; color: var(--text-sub); margin-bottom: 20px; text-shadow: 1px 1px 3px rgba(0,0,0,0.9); }
+        
+        .cta-box {
+            position: relative;
+            z-index: 2;
+            background: linear-gradient(135deg, rgba(30,45,60,0.95), rgba(60,80,100,0.95));
+            padding: 60px 20px;
+            text-align: center;
+            margin-top: 0; /* セクションから連続させる */
+        }
+        .btn {
+            display: inline-block;
+            background-color: #ffffff;
+            color: #0f0f0f;
+            padding: 22px 40px;
+            text-decoration: none;
+            font-weight: bold;
+            border-radius: 50px;
+            font-size: 1.2rem;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.6);
+            transition: transform 0.3s;
+        }
+        .btn:active { transform: scale(0.95); }
+        footer { text-align: center; padding: 40px 0; color: #555; font-size: 0.8rem; background-color: #050505; position: relative; z-index: 2; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        
+        <section id="hero" style="background-image: url('generated_images/background.png');">
+            <div class="content-wrapper">
+                <h2>【静かな真実】<br>無意識に触れる<br>「認知の構造」</h2>
+                <p>この世界には、言葉にできない「静かなルール」が存在します。<br>その正体に、今、そっと触れてみませんか。</p>
+            </div>
+        </section>
+        
+        <section id="prob1" style="background-image: url('generated_images/bg_1776355722.png');">
+            <div class="content-wrapper">
+                <h2>1. 報われない努力の正体</h2>
+                <p>あなたの言葉が届かないのは、あなたが悪いからではありません。<br>ただ、心の扉を開ける「鍵」が少しだけ違っていただけなのです。</p>
+            </div>
+        </section>
+        
+        <section id="prob2" style="background-image: url('generated_images/bg_1776356167.png');">
+            <div class="content-wrapper">
+                <h2>2. 正論よりも心の震え</h2>
+                <p>人は、理屈で納得しても心までは動かされません。<br>大切なのは、あなたの奥底にある「共鳴」を伝えることです。</p>
+            </div>
+        </section>
+        
+        <section id="insight1" style="background-image: url('generated_images/bg_1776358484.png');">
+            <div class="content-wrapper">
+                <h2>3. 本能に生かされている</h2>
+                <p>「失うことが怖い」と感じるのは、あなたがそれだけ今を大切に想っている証拠です。</p>
+            </div>
+        </section>
+        
+        <section id="insight2" style="background-image: url('generated_images/bg_1776358822.png');">
+            <div class="content-wrapper">
+                <h2>4. 広告の言葉の正体</h2>
+                <p>それは、あなたの心が世界の歪みに敏感だからです。<br>仕組みを知ることで、そのざわつきは「平穏」に変わります。</p>
+            </div>
+        </section>
+        
+        <section id="insight3" style="background-image: url('generated_images/bg_1776359063.png');">
+            <div class="content-wrapper">
+                <h2>5. 「孤独」の裏返し</h2>
+                <p>焦りを感じるのは、あなたがもっと良くなりたいと願う純粋な向上心があるからです。</p>
+            </div>
+        </section>
+        
+        <section id="logic1" style="background-image: url('generated_images/bg_1776359287.png');">
+            <div class="content-wrapper">
+                <h2>6. SNSという鏡</h2>
+                <p>映し出されたノイズに、惑わされる必要はありません。<br>鏡の裏にある「構造」を見つめれば、心はもっと自由になれます。</p>
+            </div>
+        </section>
+        
+        <section id="logic2" style="background-image: url('generated_images/bg_1776359369.png');">
+            <div class="content-wrapper">
+                <h2>7. 自分を守る盾</h2>
+                <p>知識は、誰かを支配するためだけにあるのではありません。<br>自分を、そして大切な人を守るための優しい盾なのです。</p>
+            </div>
+        </section>
+        
+        <section id="freedom" style="background-image: url('generated_images/bg_1776405560.png');">
+            <div class="content-wrapper">
+                <h2>8. 振り回されない自由</h2>
+                <p>盤面の外側から世界を見れば、選ぶべき道は自ずと見えてきます。</p>
+            </div>
+        </section>
+        
+        <section id="cta" style="background-image: url('generated_images/bg_1776406903.png');">
+            <div class="content-wrapper">
+                <h2>9. 言葉に命を吹き込む</h2>
+                <p>真に心を通わせる技術を。<br>扉は、準備ができた者だけに開く。</p>
+            </div>
+        </section>
+        
+        
+        <div class="cta-box">
+            <p style="font-size:1.3rem; margin-bottom:25px; font-weight:bold; color:#fff;">構造の外側へ進む準備はできましたか？</p>
+            <a href="https://brain-market.com/u/yknetdiviner/a/b1UTM5QTMgoTZsNWa0JXY?from=b1UDN4UzMgojclNXd" class="btn">👉 扉を開く（詳細はこちら）</a>
+        </div>
+        
+        <footer>&copy; 2026 The Silent Truth</footer>
+    </div>
+
+    <!-- スクロール検知によるフェードイン制御 -->
+    <script>
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) entry.target.classList.add('visible');
+            });
+        }, { threshold: 0.15 });
+        document.querySelectorAll('section').forEach(section => observer.observe(section));
+    </script>
+</body>
+</html>
