@@ -16,161 +16,225 @@
             background-color: #030303;
             color: var(--text-main);
             font-family: "Helvetica Neue", Arial, "Hiragino Kaku Gothic ProN", "Hiragino Sans", Meiryo, sans-serif;
-            line-height: 2.2; /* 余白を強調 */
+            line-height: 2.4; 
             overflow-x: hidden;
             -ms-overflow-style: none;
             scrollbar-width: none;
         }
         body::-webkit-scrollbar { display: none; }
         
-        .container { max-width: 500px; margin: 0 auto; }
+        /* フィルムノイズ */
+        .noise-overlay {
+            position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
+            pointer-events: none; z-index: 999; opacity: 0.04;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.7' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+        }
+
+        .container { max-width: 500px; margin: 0 auto; position: relative; }
         
         section {
-            min-height: 100vh;
+            min-height: 120vh; /* スクロールの「落ちる」感覚を強調 */
             display: flex;
             flex-direction: column;
             justify-content: center;
             padding: 0 35px;
-            background-size: cover;
-            background-position: center;
-            background-attachment: fixed;
             position: relative;
+            overflow: hidden;
+        }
+
+        /* パララックス用 背景レイヤー */
+        .bg-layer {
+            position: absolute; top: -10%; left: -10%; width: 120%; height: 120%; /* パララックスの余白 */
+            background-size: cover; background-position: center;
             opacity: 0;
-            transform: translateY(40px);
-            transition: all 1.8s cubic-bezier(0.2, 0.8, 0.2, 1);
+            z-index: 0;
+            transition: opacity 2s ease;
         }
-        section::before {
-            content: "";
-            position: absolute;
-            top: 0; left: 0; right: 0; bottom: 0;
-            background: linear-gradient(to bottom, rgba(3,3,3,0.5) 0%, rgba(3,3,3,0.95) 100%);
-            z-index: 1;
+        .bg-layer::after {
+            content: ""; position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+            background: linear-gradient(to bottom, rgba(3,3,3,0.75) 0%, rgba(3,3,3,0.95) 100%);
         }
-        section.visible { opacity: 1; transform: translateY(0); }
+
+        section.is-active .bg-layer {
+            opacity: 1;
+        }
         
         .content-wrapper {
-            position: relative;
-            z-index: 2;
+            position: relative; z-index: 2;
             border-left: 1px solid var(--accent-color);
             padding-left: 30px;
         }
-        h2 { font-size: 1.7rem; margin-bottom: 40px; color: var(--text-main); line-height: 1.6; font-weight: 300; letter-spacing: 0.08em; }
-        p { font-size: 1.1rem; color: var(--text-sub); margin-bottom: 0; letter-spacing: 0.04em; }
+
+        /* ランダム浮上用テキストスタイル（ぼやけ→鮮明） */
+        .reveal-text {
+            display: inline-block;
+            opacity: 0;
+            transform: translateY(15px);
+            filter: blur(5px);
+            transition: opacity 2.5s ease, transform 2.5s ease, filter 2.5s ease;
+        }
+        
+        section.is-active .reveal-text {
+            opacity: 1;
+            transform: translateY(0);
+            filter: blur(0);
+        }
+
+        h2 { font-size: 1.6rem; margin-bottom: 50px; color: var(--text-main); line-height: 1.6; font-weight: 300; letter-spacing: 0.1em; }
+        p { font-size: 1.1rem; color: var(--text-sub); margin-bottom: 0; letter-spacing: 0.05em; }
         
         .cta-section {
             background-color: #030303;
-            padding: 100px 35px 80px;
-            text-align: center;
-            position: relative;
-            z-index: 2;
+            padding: 150px 35px 100px; 
+            text-align: center; position: relative; z-index: 2;
         }
         .btn {
-            display: inline-block;
-            background-color: #ffffff;
-            color: #000000;
-            padding: 24px 50px;
-            text-decoration: none;
-            font-weight: bold;
-            border-radius: 3px;
-            font-size: 1.15rem;
-            letter-spacing: 0.15em;
-            transition: all 0.4s ease;
-            box-shadow: 0 4px 15px rgba(255,255,255,0.1);
+            display: inline-block; background-color: #ffffff; color: #000000;
+            padding: 24px 50px; text-decoration: none; font-weight: bold; border-radius: 2px;
+            font-size: 1.15rem; letter-spacing: 0.15em; transition: all 0.4s ease;
+            box-shadow: 0 4px 20px rgba(255,255,255,0.05);
         }
-        .btn:hover { background-color: #e0e0e0; transform: translateY(-3px); box-shadow: 0 6px 20px rgba(255,255,255,0.2); }
-        
-        footer { text-align: center; padding: 50px 0; color: #444; font-size: 0.75rem; letter-spacing: 0.25em; }
+        .btn:hover { background-color: #d2d2d2; transform: translateY(-2px); box-shadow: 0 6px 25px rgba(255,255,255,0.15); }
+        footer { text-align: center; padding: 50px 0; color: #333; font-size: 0.75rem; letter-spacing: 0.25em; }
     </style>
 </head>
 <body>
+    <div class="noise-overlay"></div>
     <div class="container">
         
-        <section id="hero" style="background-image: url('generated_images/background.png');">
+        <section id="hero">
+            <div class="bg-layer" style="background-image: url('generated_images/background.png');"></div>
             <div class="content-wrapper">
                 <h2>【静かな真実】</h2>
-                <p>なぜ、<br>「頑張っている人」ほど<br>疲弊していくのか。<br><br>その答えは、<br>目に見えない「構造」の中にあります。</p>
+                <p>なぜ、<br>「頑張っている人」ほど<br>疲弊していくのか。<br><br><br>その答えは、<br>目に見えない「構造」の中にあります。</p>
             </div>
         </section>
         
-        <section id="empathy" style="background-image: url('generated_images/bg_1776355722.png');">
+        <section id="empathy">
+            <div class="bg-layer" style="background-image: url('generated_images/bg_1776355722.png');"></div>
             <div class="content-wrapper">
                 <h2>1. 無意識の焦り</h2>
-                <p>SNSを開くたび、なぜか焦る。<br><br>それは、あなたが弱いからではありません。<br>この世界が、あなたの「ある反応」を<br>引き出すように設計されているからです。</p>
+                <p>SNSを開くたび、なぜか焦る。<br><br>それは、あなたが弱いからではありません。<br><br>この世界が、あなたの「ある反応」を<br>引き出すように設計されているからです。</p>
             </div>
         </section>
         
-        <section id="psycho1" style="background-image: url('generated_images/bg_1776356167.png');">
+        <section id="psycho1">
+            <div class="bg-layer" style="background-image: url('generated_images/bg_1776356167.png');"></div>
             <div class="content-wrapper">
-                <h2>2. 失うことへの恐怖<br><span style='font-size:0.9rem; color:#888; font-weight:normal;'>[ 損失回避の罠 ]</span></h2>
-                <p>人は「得をする」より、<br>「失うこと」に強く反応します。<br><br>だから広告は、未来ではなく「不安」を売る。<br><br>私たちは「欲しいから買う」のではなく、<br>「置いていかれたくないから動かされている」のです。</p>
+                <h2>2. 失うことへの恐怖</h2>
+                <p>人は「得をする」より、<br>「失うこと」に強く反応します。<br><br>だから広告は、未来ではなく「不安」を売る。<br><br><br>私たちは「欲しいから買う」のではなく、<br>「置いていかれたくないから動かされている」のです。</p>
             </div>
         </section>
         
-        <section id="psycho2" style="background-image: url('generated_images/bg_1776358484.png');">
+        <section id="psycho2">
+            <div class="bg-layer" style="background-image: url('generated_images/bg_1776358484.png');"></div>
             <div class="content-wrapper">
-                <h2>3. 測られる現在地<br><span style='font-size:0.9rem; color:#888; font-weight:normal;'>[ 社会的比較の呪縛 ]</span></h2>
-                <p>他人の成功を見ると、<br>人は無意識に自分の現在地を測ってしまう。<br><br>「自分だけが停滞している」<br><br>その錯覚すらも、<br>アルゴリズムは計算し尽くしています。</p>
+                <h2>3. 測られる現在地</h2>
+                <p>他人の成功を見ると、<br>人は無意識に自分の現在地を測ってしまう。<br><br>「自分だけが停滞している」<br><br><br>その錯覚すらも、<br>アルゴリズムは計算し尽くしています。</p>
             </div>
         </section>
         
-        <section id="psycho3" style="background-image: url('generated_images/bg_1776358822.png');">
+        <section id="psycho3">
+            <div class="bg-layer" style="background-image: url('generated_images/bg_1776358822.png');"></div>
             <div class="content-wrapper">
-                <h2>4. 正論が届かない理由<br><span style='font-size:0.9rem; color:#888; font-weight:normal;'>[ 感情ヒューリスティック ]</span></h2>
-                <p>正しい言葉ほど、人には届きません。<br><br>人が動くのは「理解した時」ではなく、<br>「感情が揺れた時」だからです。<br><br>正論は頭をノックするだけ。<br>心の扉を開けるのは、常に「共鳴」です。</p>
+                <h2>4. 正論が届かない理由</h2>
+                <p>正しい言葉ほど、人には届きません。<br><br>人が動くのは「理解した時」ではなく、<br>「感情が揺れた時」だからです。<br><br><br>正論は頭をノックするだけ。<br>心の扉を開けるのは、常に「共鳴」です。</p>
             </div>
         </section>
         
-        <section id="psycho4" style="background-image: url('generated_images/bg_1776359063.png');">
+        <section id="psycho4">
+            <div class="bg-layer" style="background-image: url('generated_images/bg_1776359063.png');"></div>
             <div class="content-wrapper">
-                <h2>5. 見えない群れの足音<br><span style='font-size:0.9rem; color:#888; font-weight:normal;'>[ 同調バイアス ]</span></h2>
-                <p>「みんながやっている」<br><br>その見えない群れの圧力に、人は抗えません。<br>自分の意思で選んだつもりでも、<br>実は「選ばされている」ことに<br>ほとんどの人は気づかないまま生きています。</p>
+                <h2>5. 見えない群れの足音</h2>
+                <p>「みんながやっている」<br><br>その見えない群れの圧力に、人は抗えません。<br><br>自分の意思で選んだつもりでも、<br>実は「選ばされている」ことに<br>ほとんどの人は気づかないまま生きています。</p>
             </div>
         </section>
         
-        <section id="psycho5" style="background-image: url('generated_images/bg_1776359287.png');">
+        <section id="psycho5">
+            <div class="bg-layer" style="background-image: url('generated_images/bg_1776359287.png');"></div>
             <div class="content-wrapper">
-                <h2>6. 埋められない空白<br><span style='font-size:0.9rem; color:#888; font-weight:normal;'>[ ツァイガルニク効果 ]</span></h2>
-                <p>今、あなたがこの文章を<br>ここまで読んでしまっている理由。<br><br>人は「隠されたもの」「未完成なもの」に<br>強烈に惹かれる本能を持っています。<br><br>あなたのその「続きを知りたい」という渇望も、<br>すでに構造の一部なのです。</p>
+                <h2>6. 埋められない空白</h2>
+                <p>今、あなたがこの文章を<br>ここまで読んでしまっている理由。<br><br>人は「隠されたもの」「未完成なもの」に<br>強烈に惹かれる本能を持っています。<br><br><br>あなたのその「続きを知りたい」という渇望も、<br>すでに構造の一部なのです。</p>
             </div>
         </section>
         
-        <section id="why" style="background-image: url('generated_images/bg_1776359369.png');">
+        <section id="why">
+            <div class="bg-layer" style="background-image: url('generated_images/bg_1776359369.png');"></div>
             <div class="content-wrapper">
                 <h2>7. なぜ起きるのか？</h2>
-                <p>構造を知らない者は、<br>構造を操る者の「養分」になる。<br><br>これが、決して表には出ない<br>SNSとビジネスの「静かなルール」です。</p>
+                <p>構造を知らない者は、<br>構造を操る者の「養分」になる。<br><br><br>これが、決して表には出ない<br>SNSとビジネスの「静かなルール」です。</p>
             </div>
         </section>
         
-        <section id="future" style="background-image: url('generated_images/bg_1776405560.png');">
+        <section id="future">
+            <div class="bg-layer" style="background-image: url('generated_images/bg_1776405560.png');"></div>
             <div class="content-wrapper">
                 <h2>8. 盾と剣を手にする</h2>
-                <p>この構造を理解した時。<br><br>あなたの言葉は、誰かの心を揺さぶる「剣」になり、<br>悪意ある誘導から身を守る「盾」になります。<br><br>盤面の外側に立つ準備は、できましたか。</p>
+                <p>この構造を理解した時。<br><br>あなたの言葉は、誰かの心を揺さぶる「剣」になり、<br>悪意ある誘導から身を守る「盾」になります。<br><br><br>盤面の外側に立つ準備は、できましたか。</p>
             </div>
         </section>
         
-        <section id="cta" style="background-image: url('generated_images/bg_1776406903.png');">
+        <section id="cta">
+            <div class="bg-layer" style="background-image: url('generated_images/bg_1776406903.png');"></div>
             <div class="content-wrapper">
                 <h2>9. 選択の時</h2>
-                <p>ここから先は、<br>「知らなかった頃」には戻れない知識です。<br><br>すでに理解している側へ行くか。<br>今の場所に留まり続けるか。</p>
+                <p>ここから先は、<br>「知らなかった頃」には戻れない知識です。<br><br><br>すでに理解している側へ行くか。<br>今の場所に留まり続けるか。</p>
             </div>
         </section>
         
         
         <div class="cta-section">
-            <p style="margin-bottom: 50px; font-size:0.95rem; color: #777; letter-spacing:0.1em;">選ぶのは、あなたです。</p>
+            <p style="margin-bottom: 60px; font-size:0.95rem; color: #666; letter-spacing:0.15em;">選ぶのは、あなたです。</p>
             <a href="https://brain-market.com/u/yknetdiviner/a/b1UTM5QTMgoTZsNWa0JXY?from=b1UDN4UzMgojclNXd" class="btn">👉 構造の深淵（詳細）へ</a>
         </div>
-        
         <footer>&copy; 2026 THE SILENT TRUTH</footer>
     </div>
 
     <script>
+        // 1. テキストのランダム浮上処理（JavaScriptで自動分割）
+        document.querySelectorAll('.content-wrapper h2, .content-wrapper p').forEach(el => {
+            const lines = el.innerHTML.split(/<br\s*\/?>/i);
+            el.innerHTML = '';
+            lines.forEach((line, index) => {
+                if (line.trim() !== '') {
+                    const span = document.createElement('span');
+                    span.innerHTML = line;
+                    span.className = 'reveal-text';
+                    // 0.1秒〜1.8秒のランダムな遅延を与える（不規則な浮上）
+                    span.style.transitionDelay = (Math.random() * 1.7 + 0.1) + 's';
+                    el.appendChild(span);
+                }
+                if (index < lines.length - 1) {
+                    el.appendChild(document.createElement('br'));
+                }
+            });
+        });
+
+        // 2. フェードイン発火
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
-                if (entry.isIntersecting) entry.target.classList.add('visible');
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('is-active');
+                }
             });
-        }, { threshold: 0.25 });
+        }, { threshold: 0.35 });
         document.querySelectorAll('section').forEach(section => observer.observe(section));
+
+        // 3. パララックス（視差効果）スクロール
+        window.addEventListener('scroll', () => {
+            requestAnimationFrame(() => {
+                document.querySelectorAll('section').forEach(sec => {
+                    const rect = sec.getBoundingClientRect();
+                    const bg = sec.querySelector('.bg-layer');
+                    if(bg) {
+                        // 背景画像をスクロールと逆方向にゆっくり動かし、奥行きを出す
+                        const speed = 0.25;
+                        const yOffset = rect.top * speed;
+                        bg.style.transform = `translateY(${yOffset}px) scale(1.15)`;
+                    }
+                });
+            });
+        });
     </script>
 </body>
 </html>
