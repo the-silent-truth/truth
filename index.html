@@ -7,18 +7,17 @@
     <title>静かな真実 - The Silent Truth</title>
     <style>
         :root {
-            --accent-color: #5a738c;
+            --accent-color: #465a6e;
             --text-main: #ffffff;
-            --text-sub: #e0e0e0;
+            --text-sub: #d2d2d2;
         }
         body {
             margin: 0; padding: 0;
             background-color: #050505;
             color: var(--text-main);
-            font-family: "Meiryo", sans-serif;
+            font-family: "Helvetica Neue", Arial, "Hiragino Kaku Gothic ProN", "Hiragino Sans", Meiryo, sans-serif;
             line-height: 1.8;
             overflow-x: hidden;
-            /* スクロールバー非表示（没入感向上） */
             -ms-overflow-style: none;
             scrollbar-width: none;
         }
@@ -26,27 +25,25 @@
         
         .container { max-width: 500px; margin: 0 auto; }
         
-        /* セクションごとの画像背景設定 */
         section {
             min-height: 100vh;
             display: flex;
             flex-direction: column;
             justify-content: center;
-            padding: 0 30px;
+            padding: 0 40px;
             background-size: cover;
             background-position: center;
-            background-attachment: fixed; /* パララックス効果（iOSSafariでは一部制限あり） */
+            background-attachment: fixed;
             position: relative;
             opacity: 0;
-            transform: translateY(30px);
-            transition: all 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            transform: translateY(40px);
+            transition: all 1.5s cubic-bezier(0.2, 0.8, 0.2, 1);
         }
-        /* 文字の可読性を確保する漆黒のグラデーション・オーバーレイ */
         section::before {
             content: "";
             position: absolute;
             top: 0; left: 0; right: 0; bottom: 0;
-            background: linear-gradient(to bottom, rgba(5,5,5,0.6) 0%, rgba(5,5,5,0.95) 100%);
+            background: linear-gradient(to bottom, rgba(5,5,5,0.4) 0%, rgba(5,5,5,0.9) 100%);
             z-index: 1;
         }
         section.visible { opacity: 1; transform: translateY(0); }
@@ -54,34 +51,35 @@
         .content-wrapper {
             position: relative;
             z-index: 2;
-            border-left: 3px solid var(--accent-color);
-            padding-left: 20px;
+            border-left: 2px solid var(--accent-color);
+            padding-left: 25px;
         }
-        h2 { font-size: 2.0rem; margin-bottom: 30px; color: var(--text-main); line-height: 1.4; text-shadow: 2px 2px 4px rgba(0,0,0,0.9); }
-        p { font-size: 1.15rem; color: var(--text-sub); margin-bottom: 20px; text-shadow: 1px 1px 3px rgba(0,0,0,0.9); }
+        h2 { font-size: 1.8rem; margin-bottom: 35px; color: var(--text-main); line-height: 1.5; font-weight: 600; letter-spacing: 0.05em; }
+        p { font-size: 1.05rem; color: var(--text-sub); margin-bottom: 25px; letter-spacing: 0.02em; }
         
-        .cta-box {
+        .cta-section {
+            background-color: #050505;
+            padding: 80px 40px;
+            text-align: center;
             position: relative;
             z-index: 2;
-            background: linear-gradient(135deg, rgba(30,45,60,0.95), rgba(60,80,100,0.95));
-            padding: 60px 20px;
-            text-align: center;
-            margin-top: 0; /* セクションから連続させる */
         }
         .btn {
             display: inline-block;
             background-color: #ffffff;
-            color: #0f0f0f;
-            padding: 22px 40px;
+            color: #050505;
+            padding: 22px 45px;
             text-decoration: none;
             font-weight: bold;
-            border-radius: 50px;
-            font-size: 1.2rem;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.6);
-            transition: transform 0.3s;
+            border-radius: 4px;
+            font-size: 1.1rem;
+            letter-spacing: 0.1em;
+            transition: all 0.3s ease;
         }
-        .btn:active { transform: scale(0.95); }
-        footer { text-align: center; padding: 40px 0; color: #555; font-size: 0.8rem; background-color: #050505; position: relative; z-index: 2; }
+        .btn:hover { background-color: #d2d2d2; transform: translateY(-2px); }
+        .btn:active { transform: translateY(0); }
+        
+        footer { text-align: center; padding: 40px 0; color: #333; font-size: 0.7rem; letter-spacing: 0.2em; }
     </style>
 </head>
 <body>
@@ -90,89 +88,88 @@
         <section id="hero" style="background-image: url('generated_images/background.png');">
             <div class="content-wrapper">
                 <h2>【静かな真実】<br>無意識に触れる<br>「認知の構造」</h2>
-                <p>この世界には、言葉にできない「静かなルール」が存在します。<br>その正体に、今、そっと触れてみませんか。</p>
+                <p>この世界には、言葉にできない「静かなルール」が存在します。<br>SNS、ビジネス、そして日常の会話。<br>そのすべてを支配する構造に、そっと触れてみませんか。</p>
             </div>
         </section>
         
         <section id="prob1" style="background-image: url('generated_images/bg_1776355722.png');">
             <div class="content-wrapper">
                 <h2>1. 報われない努力の正体</h2>
-                <p>あなたの言葉が届かないのは、あなたが悪いからではありません。<br>ただ、心の扉を開ける「鍵」が少しだけ違っていただけなのです。</p>
+                <p>あなたの発信が届かないのは、あなたが悪いからではありません。<br>ただ、多くの人が無意識に従っている「反応の型」を知らないだけなのです。<br>型を知らぬ努力は、砂漠に水を撒く行為に似ています。</p>
             </div>
         </section>
         
         <section id="prob2" style="background-image: url('generated_images/bg_1776356167.png');">
             <div class="content-wrapper">
-                <h2>2. 正論よりも心の震え</h2>
-                <p>人は、理屈で納得しても心までは動かされません。<br>大切なのは、あなたの奥底にある「共鳴」を伝えることです。</p>
+                <h2>2. SNS・発信・ビジネス。<br>「必須知識」への変遷</h2>
+                <p>人の心を動かす力は、もはや一部の才能ではありません。<br>溢れる情報の海で、誰かの足を止め、心に楔を打ち込む。<br>それは現代を生きる上での、避けて通れない「技術」です。</p>
             </div>
         </section>
         
         <section id="insight1" style="background-image: url('generated_images/bg_1776358484.png');">
             <div class="content-wrapper">
-                <h2>3. 本能に生かされている</h2>
-                <p>「失うことが怖い」と感じるのは、あなたがそれだけ今を大切に想っている証拠です。</p>
+                <h2>3. 既に、多くの企業や<br>発信者は理解しています</h2>
+                <p>あなたが何気なくタップした広告、つい最後まで見てしまった動画。<br>それらはすべて、この構造に基づいて設計されています。<br>仕掛ける側は、既にこの「静かなルール」を使いこなしています。</p>
             </div>
         </section>
         
         <section id="insight2" style="background-image: url('generated_images/bg_1776358822.png');">
             <div class="content-wrapper">
-                <h2>4. 広告の言葉の正体</h2>
-                <p>それは、あなたの心が世界の歪みに敏感だからです。<br>仕組みを知ることで、そのざわつきは「平穏」に変わります。</p>
+                <h2>4. 広告の言葉に<br>胸がざわつく理由</h2>
+                <p>それは、あなたの心が世界の歪みに敏感だからです。<br>仕組みを知らなければ、一生誰かの意図の中で踊らされることになります。<br>構造を知ることは、自分を取り戻すことに他なりません。</p>
             </div>
         </section>
         
         <section id="insight3" style="background-image: url('generated_images/bg_1776359063.png');">
             <div class="content-wrapper">
-                <h2>5. 「孤独」の裏返し</h2>
-                <p>焦りを感じるのは、あなたがもっと良くなりたいと願う純粋な向上心があるからです。</p>
+                <h2>5. 「置いていかれる」<br>という本能の警告</h2>
+                <p>焦りを感じるのは、あなたが「何か」に気づき始めているからです。<br>理解している者と、そうでない者の差は、今日この瞬間も広がり続けています。</p>
             </div>
         </section>
         
         <section id="logic1" style="background-image: url('generated_images/bg_1776359287.png');">
             <div class="content-wrapper">
-                <h2>6. SNSという鏡</h2>
-                <p>映し出されたノイズに、惑わされる必要はありません。<br>鏡の裏にある「構造」を見つめれば、心はもっと自由になれます。</p>
+                <h2>6. 知識は、支配するため<br>だけにあるのではない</h2>
+                <p>SNSという鏡に映し出されたノイズに、惑わされる必要はありません。<br>構造を理解した時、その鏡はあなたの武器に変わります。</p>
             </div>
         </section>
         
         <section id="logic2" style="background-image: url('generated_images/bg_1776359369.png');">
             <div class="content-wrapper">
-                <h2>7. 自分を守る盾</h2>
-                <p>知識は、誰かを支配するためだけにあるのではありません。<br>自分を、そして大切な人を守るための優しい盾なのです。</p>
+                <h2>7. 自分と大切な人を<br>守るための「盾」</h2>
+                <p>言葉一つで、人は救われもすれば、深く傷つきもします。<br>正しく伝える技術は、あなたを、そしてあなたの大切な人を守る優しい盾になります。</p>
             </div>
         </section>
         
         <section id="freedom" style="background-image: url('generated_images/bg_1776405560.png');">
             <div class="content-wrapper">
-                <h2>8. 振り回されない自由</h2>
-                <p>盤面の外側から世界を見れば、選ぶべき道は自ずと見えてきます。</p>
+                <h2>8. 盤面の外側から<br>世界を見つめる</h2>
+                <p>もう、誰かの意図に振り回される必要はありません。<br>構造を知り、盤面の外側に立った時、選ぶべき道は自ずと見えてきます。</p>
             </div>
         </section>
         
-        <section id="cta" style="background-image: url('generated_images/bg_1776406903.png');">
+        <section id="cta-prev" style="background-image: url('generated_images/bg_1776406903.png');">
             <div class="content-wrapper">
-                <h2>9. 言葉に命を吹き込む</h2>
-                <p>真に心を通わせる技術を。<br>扉は、準備ができた者だけに開く。</p>
+                <h2>9. 知らなくても生きていける。<br>ただ、差は広がり続ける。</h2>
+                <p>真に心を通わせ、人の心を動かす技術。<br>この扉は、準備ができた者だけに開かれます。<br>理解している側へ行くか、今の場所に留まるか。選ぶのはあなたです。</p>
             </div>
         </section>
         
         
-        <div class="cta-box">
-            <p style="font-size:1.3rem; margin-bottom:25px; font-weight:bold; color:#fff;">構造の外側へ進む準備はできましたか？</p>
-            <a href="https://brain-market.com/u/yknetdiviner/a/b1UTM5QTMgoTZsNWa0JXY?from=b1UDN4UzMgojclNXd" class="btn">👉 扉を開く（詳細はこちら）</a>
+        <div class="cta-section">
+            <p style="margin-bottom: 40px; font-style: italic; color: #888;">The door only opens for those who are ready.</p>
+            <a href="https://brain-market.com/u/yknetdiviner/a/b1UTM5QTMgoTZsNWa0JXY?from=b1UDN4UzMgojclNXd" class="btn">👉 構造の深淵へ触れる</a>
         </div>
         
-        <footer>&copy; 2026 The Silent Truth</footer>
+        <footer>&copy; 2026 THE SILENT TRUTH</footer>
     </div>
 
-    <!-- スクロール検知によるフェードイン制御 -->
     <script>
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) entry.target.classList.add('visible');
             });
-        }, { threshold: 0.15 });
+        }, { threshold: 0.2 });
         document.querySelectorAll('section').forEach(section => observer.observe(section));
     </script>
 </body>
