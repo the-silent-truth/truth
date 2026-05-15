@@ -7,17 +7,18 @@
     <title>静かな真実 - The Silent Truth</title>
     <style>
         :root {
-            --accent-color: #5a738c;
-            --text-main: #f0f0f0;
-            --text-sub: #c8c8c8;
-            --blood-red: #8a1c1c;
+            --accent-color: #6a8ba6;
+            --text-main: #ffffff;
+            --text-sub: #dcdcdc;
+            --blood-red: #a82a2a;
+            --bg-dark: #0a0a0a;
         }
         body {
             margin: 0; padding: 0;
-            background-color: #020202;
+            background-color: var(--bg-dark);
             color: var(--text-main);
             font-family: "Helvetica Neue", Arial, "Hiragino Kaku Gothic ProN", "Hiragino Sans", Meiryo, sans-serif;
-            line-height: 2.5; 
+            line-height: 2.2;
             overflow-x: hidden;
             -ms-overflow-style: none; scrollbar-width: none;
         }
@@ -25,78 +26,75 @@
         
         .noise-overlay {
             position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
-            pointer-events: none; z-index: 999; opacity: 0.05;
+            pointer-events: none; z-index: 999; opacity: 0.03;
             background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
         }
 
         .container { max-width: 500px; margin: 0 auto; position: relative; }
         
         section {
-            min-height: 130vh; 
+            min-height: 110vh;
             display: flex; flex-direction: column; justify-content: center;
             padding: 0 35px; position: relative; overflow: hidden;
         }
 
         .bg-layer {
-            position: absolute; top: -15%; left: -15%; width: 130%; height: 130%; 
+            position: absolute; top: -10%; left: -10%; width: 120%; height: 120%; 
             background-size: cover; background-position: center;
             opacity: 0; z-index: 0;
-            transition: opacity 3s ease, filter 2s ease;
-            filter: grayscale(80%) contrast(1.2);
+            transition: opacity 2s ease, filter 2s ease;
+            filter: grayscale(60%) contrast(1.1) brightness(0.6);
         }
         .bg-layer::after {
             content: ""; position: absolute; top: 0; left: 0; right: 0; bottom: 0;
-            background: linear-gradient(to bottom, rgba(2,2,2,0.85) 0%, rgba(2,2,2,0.98) 100%);
+            background: linear-gradient(to bottom, rgba(10,10,10,0.6) 0%, rgba(10,10,10,0.9) 100%);
         }
 
         section.is-active .bg-layer { opacity: 1; }
         
         .content-wrapper {
             position: relative; z-index: 2;
-            border-left: 1px solid var(--accent-color);
+            border-left: 2px solid var(--accent-color);
             padding-left: 30px;
-            transform: scale(0.95); 
-            transition: transform 3s cubic-bezier(0.1, 0.9, 0.2, 1);
+            transform: scale(0.98);
+            transition: transform 2s cubic-bezier(0.1, 0.9, 0.2, 1);
         }
         section.is-active .content-wrapper { transform: scale(1); }
 
-        /* ランダム浮上用テキスト */
         .reveal-text {
-            display: inline-block; opacity: 0; transform: translateY(20px); filter: blur(8px);
-            transition: opacity 3s ease, transform 3s ease, filter 3s ease;
+            display: inline-block; opacity: 0; transform: translateY(15px); filter: blur(5px);
+            transition: opacity 1.5s ease, transform 1.5s ease, filter 1.5s ease;
         }
         section.is-active .reveal-text { opacity: 1; transform: translateY(0); filter: blur(0); }
 
-        /* グリッチ（一瞬赤くなる）演出 */
         @keyframes glitch-anim {
             0% { text-shadow: 0 0 0 transparent; }
-            20% { text-shadow: 2px 0 var(--blood-red), -2px 0 #0ff; transform: translate(-1px, 1px); }
-            40% { text-shadow: -2px 0 var(--blood-red), 2px 0 #0ff; transform: translate(1px, -1px); }
+            20% { text-shadow: 1px 0 var(--blood-red), -1px 0 #0ff; transform: translate(-0.5px, 0.5px); }
+            40% { text-shadow: -1px 0 var(--blood-red), 1px 0 #0ff; transform: translate(0.5px, -0.5px); }
             60% { text-shadow: 0 0 0 transparent; transform: translate(0, 0); }
         }
-        .glitch-active h2 { animation: glitch-anim 0.4s ease-in-out forwards; }
+        .glitch-active h2 { animation: glitch-anim 0.3s ease-in-out forwards; }
 
-        h2 { font-size: 1.55rem; margin-bottom: 50px; color: var(--text-main); line-height: 1.7; font-weight: 300; letter-spacing: 0.1em; }
-        p { font-size: 1.05rem; color: var(--text-sub); margin-bottom: 0; letter-spacing: 0.05em; }
+        h2 { font-size: 1.6rem; margin-bottom: 45px; color: var(--text-main); line-height: 1.6; font-weight: 400; letter-spacing: 0.1em; }
+        p { font-size: 1.1rem; color: var(--text-sub); margin-bottom: 0; letter-spacing: 0.05em; }
         
-        /* 引用（名言）専用スタイル */
         blockquote {
-            margin: 0; padding: 20px 0 20px 25px;
+            margin: 0; padding: 15px 0 15px 25px;
             border-left: 2px solid var(--blood-red);
-            font-style: normal; font-size: 1.15rem; color: #e0e0e0;
-            background: linear-gradient(90deg, rgba(138, 28, 28, 0.1) 0%, transparent 100%);
+            font-style: normal; font-size: 1.15rem; color: #f0f0f0;
+            background: linear-gradient(90deg, rgba(168, 42, 42, 0.15) 0%, transparent 100%);
         }
-        blockquote span { display: block; margin-top: 15px; font-size: 0.85rem; color: #888; text-align: right; letter-spacing: 0.1em; }
+        blockquote span { display: block; margin-top: 10px; font-size: 0.85rem; color: #aaa; text-align: right; letter-spacing: 0.1em; }
 
-        .cta-section { background-color: #020202; padding: 150px 35px 120px; text-align: center; position: relative; z-index: 2; }
+        .cta-section { background-color: var(--bg-dark); padding: 120px 35px 100px; text-align: center; position: relative; z-index: 2; }
         .btn {
             display: inline-block; background-color: #ffffff; color: #000000;
-            padding: 24px 50px; text-decoration: none; font-weight: bold; border-radius: 2px;
-            font-size: 1.15rem; letter-spacing: 0.15em; transition: all 0.4s ease;
-            box-shadow: 0 0 30px rgba(255,255,255,0.05);
+            padding: 22px 45px; text-decoration: none; font-weight: bold; border-radius: 4px;
+            font-size: 1.15rem; letter-spacing: 0.15em; transition: all 0.3s ease;
+            box-shadow: 0 0 20px rgba(255,255,255,0.1);
         }
-        .btn:hover { background-color: #e0e0e0; transform: translateY(-2px); box-shadow: 0 0 40px rgba(255,255,255,0.15); }
-        footer { text-align: center; padding: 50px 0; color: #222; font-size: 0.75rem; letter-spacing: 0.25em; }
+        .btn:hover { background-color: #e0e0e0; transform: translateY(-3px); box-shadow: 0 0 30px rgba(255,255,255,0.2); }
+        footer { text-align: center; padding: 40px 0; color: #555; font-size: 0.75rem; letter-spacing: 0.25em; }
     </style>
 </head>
 <body>
@@ -107,76 +105,75 @@
             <div class="bg-layer" style="background-image: url('generated_images/background.png');"></div>
             <div class="content-wrapper">
                 <h2>【静かな真実】</h2>
-                <p>なぜ、<br>努力しているあなただけが<br>「選ばれる側」に行けないのか。<br><br><br>その残酷な答えは、<br>目に見えない「構造」の中にあります。</p>
+                <p>毎日学んでいるのに、<br>なぜか何も変わらない。<br><br><br>努力しているあなただけが<br>なぜ「選ばれる側」に行けないのか。<br><br><br>その残酷な答えは、<br>目に見えない「構造」の中にあります。</p>
+            </div>
+        </section>
+        
+        <section id="empathy1">
+            <div class="bg-layer" style="background-image: url('generated_images/bg_1776355722.png');"></div>
+            <div class="content-wrapper">
+                <h2>無意識の摩耗</h2>
+                <p>SNSを開くたび、なぜか疲れる。<br><br>それは、あなたが弱いからではありません。<br><br>人は他人の成功を見ると、<br>無意識に自分の現在地を測ってしまう。<br>この世界は、あなたのその「比較と嫉妬」を<br>引き出すように設計されているのです。</p>
             </div>
         </section>
         
         <section id="quote1">
-            <div class="bg-layer" style="background-image: url('generated_images/bg_1776355722.png');"></div>
+            <div class="bg-layer" style="background-image: url('generated_images/bg_1776356167.png');"></div>
             <div class="content-wrapper">
-                <h2>無意識の支配</h2>
+                <h2>深淵からの警告</h2>
                 <p><blockquote>「無意識を意識化しない限り、<br>それはあなたの人生を支配し、<br>あなたはそれを運命と呼ぶだろう。」<br><span>— カール・ユング（心理学者）</span></blockquote></p>
             </div>
         </section>
         
-        <section id="dark_emotion">
-            <div class="bg-layer" style="background-image: url('generated_images/bg_1776356167.png');"></div>
+        <section id="empathy2">
+            <div class="bg-layer" style="background-image: url('generated_images/bg_1776358484.png');"></div>
             <div class="content-wrapper">
-                <h2>1. 報われないという黒い感情</h2>
-                <p>SNSを見るたびに押し寄せる焦り。<br>「なぜ、あいつばかりが。」<br><br>あなたが弱いからではありません。<br><br>この世界は、あなたのその「比較と嫉妬」を<br>引き出すように設計されているからです。<br>彼らは、あなたの反応を完全に予測しています。</p>
+                <h2>真面目な人ほど消耗する理由</h2>
+                <p>あなたは常に「正しい答え」を探していませんか？<br><br><br>正しい言葉は、誰の心も動かしません。<br><br>人が動くのは「理解した時」ではなく、<br>「自分の痛みを理解された」と<br>感じた時だからです。</p>
             </div>
         </section>
         
-        <section id="glimpse_answer">
-            <div class="bg-layer" style="background-image: url('generated_images/bg_1776358484.png');"></div>
+        <section id="logic_hack">
+            <div class="bg-layer" style="background-image: url('generated_images/bg_1776358822.png');"></div>
             <div class="content-wrapper">
-                <h2>2. 「不安」という名のトリガー</h2>
-                <p>人は「得る喜び」より<br>「失う恐怖」に2倍強く反応します。<br><br>×「最新のカメラです」<br>〇「今のままでは、一生の思い出が粗い画質でしか残りません」<br><br>私たちは欲しいから買うのではなく、<br>「置いていかれる恐怖」から逃げるために<br>動かされているのです。</p>
+                <h2>「不安」という名のハック</h2>
+                <p>人は「得る喜び」より<br>「失う恐怖」に強く反応します。<br><br>×「最新のノウハウです」<br>〇「このままでは、一生搾取される側に留まります」<br><br>気づけば私たちは、<br>「置いていかれる恐怖」から逃げるために<br>動かされているのです。</p>
             </div>
         </section>
         
         <section id="quote2">
-            <div class="bg-layer" style="background-image: url('generated_images/bg_1776358822.png');"></div>
+            <div class="bg-layer" style="background-image: url('generated_images/bg_1776359063.png');"></div>
             <div class="content-wrapper">
                 <h2>欲望の錬金術</h2>
                 <p><blockquote>「コピーが新たな欲望を創り出すのではない。<br>すでに人々の心の中にある恐怖や希望を、<br>特定の場所へ集めるだけだ。」<br><span>— ユージン・シュワルツ（伝説のコピーライター）</span></blockquote></p>
             </div>
         </section>
         
-        <section id="psycho_hack">
-            <div class="bg-layer" style="background-image: url('generated_images/bg_1776359063.png');"></div>
-            <div class="content-wrapper">
-                <h2>3. 操られる側からの脱却</h2>
-                <p>正しい言葉は、誰の心も動かしません。<br><br>人が動くのは「理解した時」ではなく、<br>「感情を揺さぶられた時」だからです。<br><br>努力が足りないのではなく、<br>あなたは戦う盤面の「ルール」を知らないだけなのです。</p>
-            </div>
-        </section>
-        
-        <section id="why">
+        <section id="why_now">
             <div class="bg-layer" style="background-image: url('generated_images/bg_1776359287.png');"></div>
             <div class="content-wrapper">
-                <h2>4. なぜ、無料で教えるのか</h2>
-                <p>知識なき者は、一生「養分」として<br>時間を搾取され続けます。<br><br>あなたが今まで刺されてきた「言葉の刃」を、<br>今度はあなたが「自分を守る盾」として、<br>そして「誰かを動かす力」として使う番です。</p>
+                <h2>なぜ、今なのか。</h2>
+                <p>構造を知らない者は、一生<br>誰かの意図の上で踊る「盤上の駒」として<br>時間を搾取され続けます。<br><br>あなたが今まで刺されてきた「言葉の刃」を、<br>今度はあなたが「自分を守る盾」として、<br>そして「誰かを動かす力」として使う番です。</p>
             </div>
         </section>
         
         <section id="cta">
             <div class="bg-layer" style="background-image: url('generated_images/bg_1776359369.png');"></div>
             <div class="content-wrapper">
-                <h2>5. 選択の時</h2>
-                <p>ここから先は、<br>「知らなかった頃」には戻れない知識です。<br><br><br>構造を知り「仕掛ける側」に回るか。<br>知らぬ間に「搾取され続ける」か。</p>
+                <h2>盤面の外側へ</h2>
+                <p>ここから先は、<br>「知らなかった頃」には戻れない知識です。<br><br><br>構造を知り「仕掛ける側」に回るか。<br>知らぬ間に「消費され続ける」か。</p>
             </div>
         </section>
         
         
         <div class="cta-section">
-            <p style="margin-bottom: 60px; font-size:0.95rem; color: #555; letter-spacing:0.2em;">選ぶのは、あなたです。</p>
-            <a href="https://brain-market.com/u/yknetdiviner/a/b1UTM5QTMgoTZsNWa0JXY?from=b1UDN4UzMgojclNXd" class="btn">👉 構造の深淵（詳細）へ</a>
+            <p style="margin-bottom: 50px; font-size:0.95rem; color: #888; letter-spacing:0.2em;">“気づいてしまった人”だけ先へ</p>
+            <a href="https://brain-market.com/u/yknetdiviner/a/b1UTM5QTMgoTZsNWa0JXY?from=b1UDN4UzMgojclNXd" class="btn">👉 盤面の外側を知る</a>
         </div>
         <footer>&copy; 2026 THE SILENT TRUTH</footer>
     </div>
 
     <script>
-        // 1. テキストのランダム浮上処理
         document.querySelectorAll('.content-wrapper h2, .content-wrapper p, .content-wrapper blockquote').forEach(el => {
             const htmlContent = el.innerHTML;
             if(el.tagName.toLowerCase() !== 'blockquote'){
@@ -187,41 +184,38 @@
                         const span = document.createElement('span');
                         span.innerHTML = line;
                         span.className = 'reveal-text';
-                        span.style.transitionDelay = (Math.random() * 2.0 + 0.2) + 's';
+                        span.style.transitionDelay = (Math.random() * 1.0 + 0.1) + 's';
                         el.appendChild(span);
                     }
                     if (index < lines.length - 1) el.appendChild(document.createElement('br'));
                 });
             } else {
                 el.classList.add('reveal-text');
-                el.style.transitionDelay = '0.5s';
+                el.style.transitionDelay = '0.3s';
             }
         });
 
-        // 2. フェードイン ＆ 一瞬のグリッチ（バグ）発火
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
                     entry.target.classList.add('is-active');
-                    // 視界に入って1.5秒後、一瞬だけタイトルが赤くバグる（監視されてる感）
                     setTimeout(() => {
                         entry.target.classList.add('glitch-active');
-                    }, 1500);
+                    }, 1200);
                 }
             });
-        }, { threshold: 0.4 });
+        }, { threshold: 0.3 });
         document.querySelectorAll('section').forEach(section => observer.observe(section));
 
-        // 3. パララックス（さらに深い奥行き）
         window.addEventListener('scroll', () => {
             requestAnimationFrame(() => {
                 document.querySelectorAll('section').forEach(sec => {
                     const rect = sec.getBoundingClientRect();
                     const bg = sec.querySelector('.bg-layer');
                     if(bg) {
-                        const speed = 0.3; // 速度を上げて奥行きを強調
+                        const speed = 0.2;
                         const yOffset = rect.top * speed;
-                        bg.style.transform = `translateY(${yOffset}px) scale(1.15)`;
+                        bg.style.transform = `translateY(${yOffset}px) scale(1.1)`;
                     }
                 });
             });
