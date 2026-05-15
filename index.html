@@ -7,16 +7,16 @@
     <title>静かな真実 - The Silent Truth</title>
     <style>
         :root {
-            --accent-color: #465a6e;
-            --text-main: #ffffff;
-            --text-sub: #d2d2d2;
+            --accent-color: #5a738c;
+            --text-main: #f0f0f0;
+            --text-sub: #c8c8c8;
         }
         body {
             margin: 0; padding: 0;
-            background-color: #050505;
+            background-color: #030303;
             color: var(--text-main);
             font-family: "Helvetica Neue", Arial, "Hiragino Kaku Gothic ProN", "Hiragino Sans", Meiryo, sans-serif;
-            line-height: 1.8;
+            line-height: 2.2; /* 余白を強調 */
             overflow-x: hidden;
             -ms-overflow-style: none;
             scrollbar-width: none;
@@ -30,20 +30,20 @@
             display: flex;
             flex-direction: column;
             justify-content: center;
-            padding: 0 40px;
+            padding: 0 35px;
             background-size: cover;
             background-position: center;
             background-attachment: fixed;
             position: relative;
             opacity: 0;
             transform: translateY(40px);
-            transition: all 1.5s cubic-bezier(0.2, 0.8, 0.2, 1);
+            transition: all 1.8s cubic-bezier(0.2, 0.8, 0.2, 1);
         }
         section::before {
             content: "";
             position: absolute;
             top: 0; left: 0; right: 0; bottom: 0;
-            background: linear-gradient(to bottom, rgba(5,5,5,0.4) 0%, rgba(5,5,5,0.9) 100%);
+            background: linear-gradient(to bottom, rgba(3,3,3,0.5) 0%, rgba(3,3,3,0.95) 100%);
             z-index: 1;
         }
         section.visible { opacity: 1; transform: translateY(0); }
@@ -51,15 +51,15 @@
         .content-wrapper {
             position: relative;
             z-index: 2;
-            border-left: 2px solid var(--accent-color);
-            padding-left: 25px;
+            border-left: 1px solid var(--accent-color);
+            padding-left: 30px;
         }
-        h2 { font-size: 1.8rem; margin-bottom: 35px; color: var(--text-main); line-height: 1.5; font-weight: 600; letter-spacing: 0.05em; }
-        p { font-size: 1.05rem; color: var(--text-sub); margin-bottom: 25px; letter-spacing: 0.02em; }
+        h2 { font-size: 1.7rem; margin-bottom: 40px; color: var(--text-main); line-height: 1.6; font-weight: 300; letter-spacing: 0.08em; }
+        p { font-size: 1.1rem; color: var(--text-sub); margin-bottom: 0; letter-spacing: 0.04em; }
         
         .cta-section {
-            background-color: #050505;
-            padding: 80px 40px;
+            background-color: #030303;
+            padding: 100px 35px 80px;
             text-align: center;
             position: relative;
             z-index: 2;
@@ -67,19 +67,19 @@
         .btn {
             display: inline-block;
             background-color: #ffffff;
-            color: #050505;
-            padding: 22px 45px;
+            color: #000000;
+            padding: 24px 50px;
             text-decoration: none;
             font-weight: bold;
-            border-radius: 4px;
-            font-size: 1.1rem;
-            letter-spacing: 0.1em;
-            transition: all 0.3s ease;
+            border-radius: 3px;
+            font-size: 1.15rem;
+            letter-spacing: 0.15em;
+            transition: all 0.4s ease;
+            box-shadow: 0 4px 15px rgba(255,255,255,0.1);
         }
-        .btn:hover { background-color: #d2d2d2; transform: translateY(-2px); }
-        .btn:active { transform: translateY(0); }
+        .btn:hover { background-color: #e0e0e0; transform: translateY(-3px); box-shadow: 0 6px 20px rgba(255,255,255,0.2); }
         
-        footer { text-align: center; padding: 40px 0; color: #333; font-size: 0.7rem; letter-spacing: 0.2em; }
+        footer { text-align: center; padding: 50px 0; color: #444; font-size: 0.75rem; letter-spacing: 0.25em; }
     </style>
 </head>
 <body>
@@ -87,78 +87,78 @@
         
         <section id="hero" style="background-image: url('generated_images/background.png');">
             <div class="content-wrapper">
-                <h2>【静かな真実】<br>無意識に触れる<br>「認知の構造」</h2>
-                <p>この世界には、言葉にできない「静かなルール」が存在します。<br>SNS、ビジネス、そして日常の会話。<br>そのすべてを支配する構造に、そっと触れてみませんか。</p>
+                <h2>【静かな真実】</h2>
+                <p>なぜ、<br>「頑張っている人」ほど<br>疲弊していくのか。<br><br>その答えは、<br>目に見えない「構造」の中にあります。</p>
             </div>
         </section>
         
-        <section id="prob1" style="background-image: url('generated_images/bg_1776355722.png');">
+        <section id="empathy" style="background-image: url('generated_images/bg_1776355722.png');">
             <div class="content-wrapper">
-                <h2>1. 報われない努力の正体</h2>
-                <p>あなたの発信が届かないのは、あなたが悪いからではありません。<br>ただ、多くの人が無意識に従っている「反応の型」を知らないだけなのです。<br>型を知らぬ努力は、砂漠に水を撒く行為に似ています。</p>
+                <h2>1. 無意識の焦り</h2>
+                <p>SNSを開くたび、なぜか焦る。<br><br>それは、あなたが弱いからではありません。<br>この世界が、あなたの「ある反応」を<br>引き出すように設計されているからです。</p>
             </div>
         </section>
         
-        <section id="prob2" style="background-image: url('generated_images/bg_1776356167.png');">
+        <section id="psycho1" style="background-image: url('generated_images/bg_1776356167.png');">
             <div class="content-wrapper">
-                <h2>2. SNS・発信・ビジネス。<br>「必須知識」への変遷</h2>
-                <p>人の心を動かす力は、もはや一部の才能ではありません。<br>溢れる情報の海で、誰かの足を止め、心に楔を打ち込む。<br>それは現代を生きる上での、避けて通れない「技術」です。</p>
+                <h2>2. 失うことへの恐怖<br><span style='font-size:0.9rem; color:#888; font-weight:normal;'>[ 損失回避の罠 ]</span></h2>
+                <p>人は「得をする」より、<br>「失うこと」に強く反応します。<br><br>だから広告は、未来ではなく「不安」を売る。<br><br>私たちは「欲しいから買う」のではなく、<br>「置いていかれたくないから動かされている」のです。</p>
             </div>
         </section>
         
-        <section id="insight1" style="background-image: url('generated_images/bg_1776358484.png');">
+        <section id="psycho2" style="background-image: url('generated_images/bg_1776358484.png');">
             <div class="content-wrapper">
-                <h2>3. 既に、多くの企業や<br>発信者は理解しています</h2>
-                <p>あなたが何気なくタップした広告、つい最後まで見てしまった動画。<br>それらはすべて、この構造に基づいて設計されています。<br>仕掛ける側は、既にこの「静かなルール」を使いこなしています。</p>
+                <h2>3. 測られる現在地<br><span style='font-size:0.9rem; color:#888; font-weight:normal;'>[ 社会的比較の呪縛 ]</span></h2>
+                <p>他人の成功を見ると、<br>人は無意識に自分の現在地を測ってしまう。<br><br>「自分だけが停滞している」<br><br>その錯覚すらも、<br>アルゴリズムは計算し尽くしています。</p>
             </div>
         </section>
         
-        <section id="insight2" style="background-image: url('generated_images/bg_1776358822.png');">
+        <section id="psycho3" style="background-image: url('generated_images/bg_1776358822.png');">
             <div class="content-wrapper">
-                <h2>4. 広告の言葉に<br>胸がざわつく理由</h2>
-                <p>それは、あなたの心が世界の歪みに敏感だからです。<br>仕組みを知らなければ、一生誰かの意図の中で踊らされることになります。<br>構造を知ることは、自分を取り戻すことに他なりません。</p>
+                <h2>4. 正論が届かない理由<br><span style='font-size:0.9rem; color:#888; font-weight:normal;'>[ 感情ヒューリスティック ]</span></h2>
+                <p>正しい言葉ほど、人には届きません。<br><br>人が動くのは「理解した時」ではなく、<br>「感情が揺れた時」だからです。<br><br>正論は頭をノックするだけ。<br>心の扉を開けるのは、常に「共鳴」です。</p>
             </div>
         </section>
         
-        <section id="insight3" style="background-image: url('generated_images/bg_1776359063.png');">
+        <section id="psycho4" style="background-image: url('generated_images/bg_1776359063.png');">
             <div class="content-wrapper">
-                <h2>5. 「置いていかれる」<br>という本能の警告</h2>
-                <p>焦りを感じるのは、あなたが「何か」に気づき始めているからです。<br>理解している者と、そうでない者の差は、今日この瞬間も広がり続けています。</p>
+                <h2>5. 見えない群れの足音<br><span style='font-size:0.9rem; color:#888; font-weight:normal;'>[ 同調バイアス ]</span></h2>
+                <p>「みんながやっている」<br><br>その見えない群れの圧力に、人は抗えません。<br>自分の意思で選んだつもりでも、<br>実は「選ばされている」ことに<br>ほとんどの人は気づかないまま生きています。</p>
             </div>
         </section>
         
-        <section id="logic1" style="background-image: url('generated_images/bg_1776359287.png');">
+        <section id="psycho5" style="background-image: url('generated_images/bg_1776359287.png');">
             <div class="content-wrapper">
-                <h2>6. 知識は、支配するため<br>だけにあるのではない</h2>
-                <p>SNSという鏡に映し出されたノイズに、惑わされる必要はありません。<br>構造を理解した時、その鏡はあなたの武器に変わります。</p>
+                <h2>6. 埋められない空白<br><span style='font-size:0.9rem; color:#888; font-weight:normal;'>[ ツァイガルニク効果 ]</span></h2>
+                <p>今、あなたがこの文章を<br>ここまで読んでしまっている理由。<br><br>人は「隠されたもの」「未完成なもの」に<br>強烈に惹かれる本能を持っています。<br><br>あなたのその「続きを知りたい」という渇望も、<br>すでに構造の一部なのです。</p>
             </div>
         </section>
         
-        <section id="logic2" style="background-image: url('generated_images/bg_1776359369.png');">
+        <section id="why" style="background-image: url('generated_images/bg_1776359369.png');">
             <div class="content-wrapper">
-                <h2>7. 自分と大切な人を<br>守るための「盾」</h2>
-                <p>言葉一つで、人は救われもすれば、深く傷つきもします。<br>正しく伝える技術は、あなたを、そしてあなたの大切な人を守る優しい盾になります。</p>
+                <h2>7. なぜ起きるのか？</h2>
+                <p>構造を知らない者は、<br>構造を操る者の「養分」になる。<br><br>これが、決して表には出ない<br>SNSとビジネスの「静かなルール」です。</p>
             </div>
         </section>
         
-        <section id="freedom" style="background-image: url('generated_images/bg_1776405560.png');">
+        <section id="future" style="background-image: url('generated_images/bg_1776405560.png');">
             <div class="content-wrapper">
-                <h2>8. 盤面の外側から<br>世界を見つめる</h2>
-                <p>もう、誰かの意図に振り回される必要はありません。<br>構造を知り、盤面の外側に立った時、選ぶべき道は自ずと見えてきます。</p>
+                <h2>8. 盾と剣を手にする</h2>
+                <p>この構造を理解した時。<br><br>あなたの言葉は、誰かの心を揺さぶる「剣」になり、<br>悪意ある誘導から身を守る「盾」になります。<br><br>盤面の外側に立つ準備は、できましたか。</p>
             </div>
         </section>
         
-        <section id="cta-prev" style="background-image: url('generated_images/bg_1776406903.png');">
+        <section id="cta" style="background-image: url('generated_images/bg_1776406903.png');">
             <div class="content-wrapper">
-                <h2>9. 知らなくても生きていける。<br>ただ、差は広がり続ける。</h2>
-                <p>真に心を通わせ、人の心を動かす技術。<br>この扉は、準備ができた者だけに開かれます。<br>理解している側へ行くか、今の場所に留まるか。選ぶのはあなたです。</p>
+                <h2>9. 選択の時</h2>
+                <p>ここから先は、<br>「知らなかった頃」には戻れない知識です。<br><br>すでに理解している側へ行くか。<br>今の場所に留まり続けるか。</p>
             </div>
         </section>
         
         
         <div class="cta-section">
-            <p style="margin-bottom: 40px; font-style: italic; color: #888;">The door only opens for those who are ready.</p>
-            <a href="https://brain-market.com/u/yknetdiviner/a/b1UTM5QTMgoTZsNWa0JXY?from=b1UDN4UzMgojclNXd" class="btn">👉 構造の深淵へ触れる</a>
+            <p style="margin-bottom: 50px; font-size:0.95rem; color: #777; letter-spacing:0.1em;">選ぶのは、あなたです。</p>
+            <a href="https://brain-market.com/u/yknetdiviner/a/b1UTM5QTMgoTZsNWa0JXY?from=b1UDN4UzMgojclNXd" class="btn">👉 構造の深淵（詳細）へ</a>
         </div>
         
         <footer>&copy; 2026 THE SILENT TRUTH</footer>
@@ -169,7 +169,7 @@
             entries.forEach(entry => {
                 if (entry.isIntersecting) entry.target.classList.add('visible');
             });
-        }, { threshold: 0.2 });
+        }, { threshold: 0.25 });
         document.querySelectorAll('section').forEach(section => observer.observe(section));
     </script>
 </body>
